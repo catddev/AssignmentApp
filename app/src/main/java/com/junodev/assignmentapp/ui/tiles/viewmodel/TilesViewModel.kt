@@ -35,10 +35,7 @@ class TilesViewModel : ViewModel() {
 
     private fun Tiles.addTile(): Tiles {
         val number = getNextTileNumber()
-        return copy(
-            numbers = numbers.insertAtRandomIndex(number),
-            lastAddedNumber = number
-        )
+        return copy(numbers = numbers.insertAtRandomIndex(number), lastAddedNumber = number)
     }
 
     private fun getNextTileNumber(): Int = extractFromPool() ?: createNumber()
