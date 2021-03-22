@@ -1,4 +1,4 @@
-package com.junodev.assignmentapp.ui.tiles.view
+package com.junodev.assignmentapp.ui.tiles.adapter
 
 import android.view.View
 import android.widget.TextView
@@ -14,7 +14,11 @@ class TileViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun onBind(number: Int, isDefaultBackground: Boolean) {
         tileNumber.text = number.toString()
-        tileCard.setCardBackgroundColor(ContextCompat.getColor(itemView.context,
-            if (isDefaultBackground) R.color.gallery else R.color.pear))
+        tileCard.setCardBackgroundColor(
+            ContextCompat.getColor(
+                itemView.context,
+                if (isDefaultBackground) R.color.gallery else R.color.pear
+            )
+        )
     }
 }

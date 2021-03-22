@@ -4,7 +4,7 @@ import android.view.View
 import com.agoda.kakao.recycler.KRecyclerItem
 import com.agoda.kakao.recycler.KRecyclerView
 import com.agoda.kakao.text.KButton
-import com.junodev.assignmentapp.ui.tiles.view.TilesFragment
+import com.junodev.assignmentapp.ui.tiles.TilesFragment
 import com.kaspersky.kaspresso.screens.KScreen
 import org.hamcrest.Matcher
 

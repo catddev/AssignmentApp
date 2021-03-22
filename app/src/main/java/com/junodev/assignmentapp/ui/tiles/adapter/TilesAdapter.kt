@@ -1,4 +1,4 @@
-package com.junodev.assignmentapp.ui.tiles.view
+package com.junodev.assignmentapp.ui.tiles.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

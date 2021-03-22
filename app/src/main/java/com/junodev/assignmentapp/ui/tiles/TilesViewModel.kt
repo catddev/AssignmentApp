@@ -1,20 +1,21 @@
-package com.junodev.assignmentapp.ui.tiles.viewmodel
+package com.junodev.assignmentapp.ui.tiles
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.junodev.assignmentapp.models.presentation.Tiles
 import com.junodev.assignmentapp.utils.extensions.insertAtRandomIndex
 import com.junodev.assignmentapp.utils.startCoroutineTimer
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.util.*
 
 class TilesViewModel : ViewModel() {
 
     private val pool: PriorityQueue<Int> = PriorityQueue()
-    private val _tiles = MutableLiveData(initTiles())
-    val tiles: LiveData<Tiles> get() = _tiles
+    private val _tiles = MutableStateFlow(initTiles())
+    val tiles: StateFlow<Tiles> = _tiles.asStateFlow()
 
     init {
         viewModelScope.launch {
@@ -23,12 +24,12 @@ class TilesViewModel : ViewModel() {
     }
 
     fun deleteTile(number: Int) {
-        _tiles.value = _tiles.value?.deleteTile(number)
+        _tiles.value = _tiles.value.deleteTile(number)
         pool.offer(number)
     }
 
     private fun fetchTiles() {
-        _tiles.value = _tiles.value?.addTile()
+        _tiles.value = _tiles.value.addTile()
     }
 
     private fun Tiles.deleteTile(number: Int) = copy(numbers = numbers.filter { it != number })
@@ -42,7 +43,7 @@ class TilesViewModel : ViewModel() {
 
     private fun extractFromPool(): Int? = pool.poll()
 
-    private fun createNumber(): Int = _tiles.value?.numbers?.maxOrNull()?.inc() ?: 0
+    private fun createNumber(): Int = _tiles.value.numbers.maxOrNull()?.inc() ?: 0
 
     private fun initTiles() = Tiles(List(INITIAL_TILE_COUNT) { it + 1 })
 
